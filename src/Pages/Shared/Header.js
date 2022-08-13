@@ -1,34 +1,39 @@
 import React from "react";
-import { signOut } from "firebase/auth";
-import { useAuthState } from "react-firebase-hooks/auth";
-import auth from "../../firebase.init";
-import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { Link } from "react-router-dom";
+import StatusBar from "./StatusBar";
 
 const Header = () => {
-    const [user] = useAuthState(auth);
-    const navigate = useNavigate();
-    useEffect(() => {
-        if (!user) {
-            navigate("/login");
-        }
-    }, [user, navigate]);
-    const handleSignOut = () => {
-        signOut(auth);
-    };
+    // if (loading) {
+    //     return <div>Loading.....</div>;
+    // }
     return (
         <header>
-            <nav className="border-b border-gray-700">
-                <div className="bg-gray-700 text-white p-3 text-left flex justify-between">
-                    <span> user: {user?.displayName}</span>
-                    <button onClick={handleSignOut}>Sign Out</button>
-                </div>
-                <ul className="flex justify-center gap-10">
+            <StatusBar></StatusBar>
+            <nav>
+                <ul className="flex justify-center gap-10 items-center py-2">
                     <li>
-                        <a href="/home">Dashboard</a>
+                        <Link
+                            className="px-3 py-1 border border-gray-700 rounded-sm uppercase "
+                            to="/home"
+                        >
+                            Home
+                        </Link>
                     </li>
                     <li>
-                        <a href="/home">Add Entry</a>
+                        <Link
+                            className="px-3 py-1 border border-gray-700 rounded-sm uppercase"
+                            to="/dashboard"
+                        >
+                            Dashboard
+                        </Link>
+                    </li>
+                    <li>
+                        <Link
+                            className="px-3 py-1 border border-gray-700 rounded-sm uppercase"
+                            to="/newTask"
+                        >
+                            new Task
+                        </Link>
                     </li>
                 </ul>
             </nav>

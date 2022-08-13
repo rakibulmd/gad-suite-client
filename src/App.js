@@ -5,6 +5,7 @@ import Login from "./Pages/Login/Login";
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import Home from "./Pages/Home/Home";
 import RequireAuth from "./Pages/Login/RequireAuth";
+import NewTask from "./Pages/NewTask/NewTask";
 
 function App() {
     return (
@@ -33,6 +34,14 @@ function App() {
                     element={
                         <RequireAuth>
                             <Dashboard></Dashboard>
+                        </RequireAuth>
+                    }
+                ></Route>
+                <Route
+                    path="/newTask"
+                    element={
+                        <RequireAuth>
+                            <NewTask></NewTask>
                         </RequireAuth>
                     }
                 ></Route>
