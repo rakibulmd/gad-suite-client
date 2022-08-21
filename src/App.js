@@ -5,11 +5,11 @@ import Login from "./Pages/Login/Login";
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import Home from "./Pages/Home/Home";
 import RequireAuth from "./Pages/Login/RequireAuth";
-import NewTask from "./Pages/NewTask/NewTask";
+import ProjectForm from "./Pages/Forms/ProjectForm";
 
 function App() {
     return (
-        <div className="App">
+        <div>
             <Header></Header>
             <Routes>
                 <Route
@@ -41,7 +41,7 @@ function App() {
                     path="/newTask"
                     element={
                         <RequireAuth>
-                            <NewTask></NewTask>
+                            <ProjectForm></ProjectForm>
                         </RequireAuth>
                     }
                 ></Route>
