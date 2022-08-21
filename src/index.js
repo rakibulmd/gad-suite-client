@@ -4,8 +4,16 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
+import axios from "axios";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
+
+axios.interceptors.request.use(function (config) {
+    const token = localStorage.getItem("accessToken");
+    config.headers.Authorization = `Bearer ${token}`;
+
+    return config;
+});
 root.render(
     <React.StrictMode>
         <BrowserRouter>

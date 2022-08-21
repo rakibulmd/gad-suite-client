@@ -1,14 +1,19 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import FormLabel from "./FormLabel";
+import { useNavigate } from "react-router-dom";
 const ProjectForm = () => {
+    const navigate = useNavigate();
     const toDay = new Date().toISOString().substring(0, 10);
     const {
         register,
         formState: { errors },
         handleSubmit,
     } = useForm();
-    const onSubmit = (data) => console.log(data);
+    const onSubmit = (data) => {
+        console.log(data);
+        navigate("/dashboard");
+    };
     return (
         <div className="container mx-auto">
             <form
@@ -88,8 +93,23 @@ const ProjectForm = () => {
                             type="text"
                             id="urn"
                             className="bg-gray-50 border border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                            placeholder="236544"
+                            placeholder="CSg00"
                             {...register("urn")}
+                        />
+                        {/* {errors.urn?.type === "required" && (
+                        <span className="text-rose-600">
+                            Please enter assigner name.
+                        </span>
+                    )} */}
+                    </div>
+                    <div className="w-48">
+                        <FormLabel label="DSID" labelId="dsid"></FormLabel>
+                        <input
+                            type="text"
+                            id="dsid"
+                            className="bg-gray-50 border border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                            placeholder="236544"
+                            {...register("dsid")}
                         />
                         {/* {errors.urn?.type === "required" && (
                         <span className="text-rose-600">
@@ -102,6 +122,7 @@ const ProjectForm = () => {
                     <input
                         className="border p-3 my-3 bg-gray-300"
                         type="submit"
+                        value="Create Project"
                     />
                 </div>
             </form>
