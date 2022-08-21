@@ -2,6 +2,8 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import FormLabel from "./FormLabel";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+
 const ProjectForm = () => {
     const navigate = useNavigate();
     const toDay = new Date().toISOString().substring(0, 10);
@@ -12,7 +14,17 @@ const ProjectForm = () => {
     } = useForm();
     const onSubmit = (data) => {
         console.log(data);
-        navigate("/dashboard");
+        const postData = async () => {
+            const response = await axios.post(
+                "http://localhost:5000/createProject",
+                data
+            );
+            if (response.data) {
+                console.log("submit project form", response.data);
+                navigate(`/project/${response.data.insertedId}`);
+            }
+        };
+        postData();
     };
     return (
         <div className="container mx-auto">

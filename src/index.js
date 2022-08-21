@@ -8,12 +8,12 @@ import axios from "axios";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
-axios.interceptors.request.use(function (config) {
-    const token = localStorage.getItem("accessToken");
-    config.headers.Authorization = `Bearer ${token}`;
+// axios.interceptors.request.use(function (config) {
+//     const token = localStorage.getItem("accessToken");
+//     config.headers.Authorization = `Bearer ${token}`;
 
-    return config;
-});
+//     return config;
+// });
 root.render(
     <React.StrictMode>
         <BrowserRouter>
