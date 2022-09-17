@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import Task from "./Task";
+import Projects from "./Projects";
 
 const Dashboard = () => {
     const navigate = useNavigate();
@@ -9,10 +9,11 @@ const Dashboard = () => {
     };
     return (
         <div className="container mx-auto">
-            <Task></Task>
+            {/* <Task></Task> */}
             <button onClick={handleCreateProject} className="border p-3 m-2">
                 Create a Project
             </button>
+            <Projects></Projects>
         </div>
     );
 };

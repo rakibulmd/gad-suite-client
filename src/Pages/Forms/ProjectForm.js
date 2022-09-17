@@ -16,12 +16,12 @@ const ProjectForm = () => {
         console.log(data);
         const postData = async () => {
             const response = await axios.post(
-                "http://localhost:5000/createProject",
-                data
+                "http://localhost:5000/api/v1/projects",
+                { projectData: data }
             );
-            if (response.data) {
-                console.log("submit project form", response.data);
-                navigate(`/project/${response.data.insertedId}`);
+            if (response.data.success === "true") {
+                console.log(response);
+                navigate(`/project/${response.data?.result?.insertedId}`);
             }
         };
         postData();
