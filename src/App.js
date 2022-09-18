@@ -6,11 +6,11 @@ import Dashboard from "./Pages/Dashboard/Dashboard";
 import Home from "./Pages/Home/Home";
 import RequireAuth from "./Pages/Login/RequireAuth";
 import ProjectForm from "./Pages/Forms/ProjectForm";
-import Project from "./Pages/Project/Project";
+import ProjectDetails from "./Pages/Project/ProjectDetails";
 
 function App() {
     return (
-        <div>
+        <div className="">
             <Header></Header>
             <Routes>
                 <Route
@@ -50,7 +50,7 @@ function App() {
                     path="/project/:projectId"
                     element={
                         <RequireAuth>
-                            <Project></Project>
+                            <ProjectDetails></ProjectDetails>
                         </RequireAuth>
                     }
                 ></Route>

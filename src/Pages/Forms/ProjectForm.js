@@ -13,7 +13,7 @@ const ProjectForm = () => {
         handleSubmit,
     } = useForm();
     const onSubmit = (data) => {
-        console.log(data);
+        data.tasks = [];
         const postData = async () => {
             const response = await axios.post(
                 "http://localhost:5000/api/v1/projects",
