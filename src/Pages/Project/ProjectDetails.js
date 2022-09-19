@@ -28,6 +28,11 @@ const ProjectDetails = () => {
                 setUpdateData={setUpdateData}
                 updateData={updateData}
             ></AddTaskForm>
+            <div className="grid grid-cols-3">
+                <div>Task Name</div>
+                <div>Deliverables</div>
+                <div>Assigned to</div>
+            </div>
             {project?.tasks &&
                 project?.tasks.map((task) => (
                     <ShowTask key={task.task_id} task={task}></ShowTask>
