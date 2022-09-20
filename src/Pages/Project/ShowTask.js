@@ -1,9 +1,10 @@
+import axios from "axios";
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 
-const ShowTask = ({ task }) => {
+const ShowTask = ({ task, projectId }) => {
     const { register, control, handleSubmit } = useForm();
     const [currentEditableItem, setCurrentEditableItem] = useState(null);
     const [deliverable, setDeliverable] = useState(task.deliverables);
@@ -15,6 +16,16 @@ const ShowTask = ({ task }) => {
         "Video QA",
         "Global Master",
     ];
+    const handleDeliverablesChange = async (e) => {
+        console.log(e.target.value);
+        const response = await axios.put(
+            `http://localhost:5000/api/v1/projects/updateTask/${projectId}?tgaskId=${task.task_id}&field=deliverables`,
+            {
+                updateTaskData: { value: e.target.value },
+            }
+        );
+        console.log(response);
+    };
     return (
         <div className="grid grid-cols-3 mb-2 shadow-md p-1">
             <div className="flex">
@@ -24,7 +35,6 @@ const ShowTask = ({ task }) => {
                     defaultValue=""
                     render={({ name }) => (
                         <input
-                            type="text"
                             id={task.task_id + "taskName"}
                             onBlur={(e) => {
                                 console.log(e.target.value);
@@ -54,15 +64,16 @@ const ShowTask = ({ task }) => {
                 <Controller
                     control={control}
                     name="folderSelect"
-                    onChange={() => console.log("hellow")}
                     defaultValue=""
                     render={({ name }) => (
                         <select
                             id={task.task_id + "deliverables"}
                             onChange={(e) => {
                                 setDeliverable(e.target.value);
+                                console.log(e.target.value);
+                                handleDeliverablesChange(e);
                             }}
-                            onBlur={(e) => setCurrentEditableItem(null)}
+                            onBlur={() => setCurrentEditableItem(null)}
                             value={deliverable}
                             disabled={
                                 currentEditableItem ===
@@ -96,7 +107,7 @@ const ShowTask = ({ task }) => {
                 <Controller
                     control={control}
                     name="folderSelect"
-                    onChange={() => console.log("hellow")}
+                    onChange={() => console.log("hello")}
                     defaultValue=""
                     render={({ name }) => (
                         <select

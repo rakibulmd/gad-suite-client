@@ -35,7 +35,11 @@ const ProjectDetails = () => {
             </div>
             {project?.tasks &&
                 project?.tasks.map((task) => (
-                    <ShowTask key={task.task_id} task={task}></ShowTask>
+                    <ShowTask
+                        key={task.task_id}
+                        task={task}
+                        projectId={projectId}
+                    ></ShowTask>
                 ))}
         </div>
     );
