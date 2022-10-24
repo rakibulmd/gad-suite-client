@@ -15,7 +15,6 @@ const ProjectDetails = () => {
         async function getData() {
             const response = await axios.get(url);
             setProject(response.data.data);
-            console.log(response.data.data);
         }
         getData();
     }, [url, updateData]);

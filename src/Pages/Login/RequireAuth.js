@@ -3,18 +3,18 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import Loading from "../Loading/Loading";
 const RequireAuth = ({ children }) => {
-    // const [user, loading] = useAuthState(auth);
-    // const navigate = useNavigate();
-    // useEffect(() => {
-    //     if (!user) {
-    //         console.log("from req auth", user);
-    //         navigate("/login");
-    //     }
-    // }, [loading, navigate, user]);
-    // if (loading) {
-    //     return <div>Loading....</div>;
-    // }
+    const [user, loading] = useAuthState(auth);
+    const navigate = useNavigate();
+    if (loading) {
+        return <Loading> {children}</Loading>;
+    }
+    if (!user) {
+        console.log("trigered");
+        navigate("/login");
+    }
+
     return children;
 };
 

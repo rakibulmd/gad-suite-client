@@ -3,31 +3,16 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
+import TaskDeliverables from "./TaskDeliverables";
 
 const ShowTask = ({ task, projectId }) => {
     const { register, control, handleSubmit } = useForm();
     const [currentEditableItem, setCurrentEditableItem] = useState(null);
-    const [deliverable, setDeliverable] = useState(task.deliverables);
+
     const [assignedTo, setAssignedTo] = useState(task.assignedTo);
-    const deliverables = [
-        "Global Packaging",
-        "Global Packaging+",
-        "Flight Check",
-        "Video QA",
-        "Global Master",
-    ];
-    const handleDeliverablesChange = async (e) => {
-        console.log(e.target.value);
-        const response = await axios.put(
-            `http://localhost:5000/api/v1/projects/updateTask/${projectId}?tgaskId=${task.task_id}&field=deliverables`,
-            {
-                updateTaskData: { value: e.target.value },
-            }
-        );
-        console.log(response);
-    };
+
     return (
-        <div className="grid grid-cols-3 mb-2 shadow-md p-1">
+        <div className="grid grid-cols-3 mb-2 shadow-md p-1 bg-gray-200">
             <div className="flex">
                 <Controller
                     control={control}
@@ -60,49 +45,12 @@ const ShowTask = ({ task, projectId }) => {
                     Edit
                 </label>
             </div>
-            <div className="flex">
-                <Controller
-                    control={control}
-                    name="folderSelect"
-                    defaultValue=""
-                    render={({ name }) => (
-                        <select
-                            id={task.task_id + "deliverables"}
-                            onChange={(e) => {
-                                setDeliverable(e.target.value);
-                                console.log(e.target.value);
-                                handleDeliverablesChange(e);
-                            }}
-                            onBlur={() => setCurrentEditableItem(null)}
-                            value={deliverable}
-                            disabled={
-                                currentEditableItem ===
-                                task.task_id + "deliverables"
-                                    ? false
-                                    : true
-                            }
-                        >
-                            <option value="globalPackaging">
-                                Global Packaging
-                            </option>
-                            <option value="globalPackaging+">
-                                Global Packaging+
-                            </option>
-                            <option value="flightCheck">Flight Check</option>
-                            <option value="videoQA">Video QA</option>
-                            <option value="globalMaster">Global Master</option>
-                        </select>
-                    )}
-                />
-                <label
-                    onClick={() => {
-                        setCurrentEditableItem(task.task_id + "deliverables");
-                    }}
-                    htmlFor={task.task_id + "deliverables"}
-                >
-                    Edit
-                </label>
-            </div>
+            <TaskDeliverables
+                projectId={projectId}
+                task={task}
+                setCurrentEditableItem={setCurrentEditableItem}
+                currentEditableItem={currentEditableItem}
+            ></TaskDeliverables>
             <div className="flex">
                 <Controller
                     control={control}
